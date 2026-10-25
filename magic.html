@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ 魔法</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: linear-gradient(135deg, #1a0033, #330066, #1a0033);
+    height: 100vh; overflow: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: -apple-system, sans-serif;
+    color: #fff; user-select: none;
+  }
+  h1 { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 4px; }
+  .stage { position: relative; width: 300px; height: 300px; }
+  .orb {
+    position: absolute; border-radius: 50%;
+    animation: float 4s ease-in-out infinite;
+  }
+  .orb1 { width:120px;height:120px; background: radial-gradient(circle, #ff6ec4, #7873f5); top:60px;left:90px; animation-delay:0s; }
+  .orb2 { width:80px;height:80px; background: radial-gradient(circle, #00f2fe, #4facfe); top:140px;left:40px; animation-delay:1s; }
+  .orb3 { width:60px;height:60px; background: radial-gradient(circle, #43e97b, #38f9d7); top:100px;left:200px; animation-delay:2s; }
+  @keyframes float {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.1); }
+  }
+  .btn {
+    margin-top: 30px; padding: 14px 40px;
+    border: none; border-radius: 30px;
+    background: linear-gradient(90deg, #ff6ec4, #7873f5);
+    color: #fff; font-size: 1.1rem; cursor: pointer;
+    box-shadow: 0 0 30px rgba(255,110,196,0.6);
+    transition: transform 0.2s;
+  }
+  .btn:active { transform: scale(0.95); }
+  .msg { margin-top: 16px; font-size: 0.95rem; opacity: 0.8; min-height: 1.4em; }
+</style>
+</head>
+<body>
+  <h1>✨ 点一下</h1>
+  <div class="stage">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <button class="btn" onclick="surprise()">召唤惊喜</button>
+  <div class="msg" id="msg"></div>
+<script>
+const lines = [
+  "你刚才点的，是一个存在于云端的按钮。",
+  "这段代码跑在你手机上，由 Ara 写的。",
+  "GitHub 不只是程序员的地方。",
+  "今天是 2026 年 10 月 25 日，周日。",
+  "你的第一个公开仓库，刚刚出生。"
+];
+let i = 0;
+function surprise() {
+  document.getElementById('msg').textContent = lines[i % lines.length];
+  i++;
+  for (const o of document.querySelectorAll('.orb')) {
+    o.style.animationDuration = (2 + Math.random()*3) + 's';
+  }
+}
+</script>
+</body>
+</html>
