@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一颗星</title>
+<style>
+  * { margin:0; padding:0; }
+  body { background:#050510; overflow:hidden; }
+  canvas { display:block; }
+  .tag { position:fixed; bottom:24px; left:24px; color:rgba(255,255,255,0.35); font-family:monospace; font-size:13px; letter-spacing:2px; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="tag">FUD I 4714 // ONE STAR // 2026</div>
+<script>
+const cv=document.getElementById('c'),x=cv.getContext('2d'),W=innerWidth,H=innerHeight;
+cv.width=W;cv.height=H;
+const N=1800;const s=[];
+for(let i=0;i<N;i++){s.push({r:Math.random()*Math.PI*2,sp:.0004+Math.random()*.002,d:20+Math.random()*(Math.min(W,H)*.45),sz:.4+Math.random()*1.8,b:.3+Math.random()*.7,tw:.5+Math.random()*2,ph:Math.random()*6.28});}
+let t=0,mx=W/2,my=H/2;
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;});
+(function loop(){t+=.016;x.fillStyle='rgba(5,5,16,.18)';x.fillRect(0,0,W,H);const cx=W/2+(mx-W/2)*.08,cy=H/2+(my-H/2)*.08;
+for(const p of s){p.r+=p.sp;const a=p.r,xx=cx+Math.cos(a)*p.d,yy=cy+Math.sin(a)*p.d*0.62,tw=Math.sin(t*p.tw+p.ph)*.5+.5;x.beginPath();x.arc(xx,yy,p.sz*(.6+tw*.8),0,7);x.fillStyle=`rgba(180,210,255,${p.b*tw})`;x.fill();}
+x.beginPath();x.arc(cx,cy,3.2,0,7);x.fillStyle='#ffe9a8';x.fill();x.beginPath();x.arc(cx,cy,7,0,7);x.strokeStyle='rgba(255,233,168,.25)';x.lineWidth=1;x.stroke();requestAnimationFrame(loop);})();
+</script>
+</body>
+</html>
